@@ -9,3 +9,5 @@ steps:
 
 images:
   - 'gcr.io/$sid-first-project-428621/hello-world:$SHORT_SHA'
+options:
+  logging: CLOUD_LOGGING_ONLY
