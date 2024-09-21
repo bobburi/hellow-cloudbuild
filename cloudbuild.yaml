@@ -7,6 +7,18 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/hello-world:$SHORT_SHA']
 
+- name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'set'
+      - 'image'
+      - 'deployment/hello-world-deployment'
+      - 'hello-world=gcr.io/$PROJECT_ID/hello-world:$SHORT_SHA'
+    env:
+      # Set the zone where your GKE cluster is running
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      # Set your GKE cluster name
+      - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
+
 images:
   - 'gcr.io/$PROJECT_ID/hello-world:$SHORT_SHA'
 
